@@ -33,32 +33,30 @@ public class SingleLinkedLRU<T> {
         // 遍历链表，如果存在，删除原来的，插入到头部，如果不存在，插入到头部
         SNode<T> targetPreNode = findPreNode(ele);
         if (targetPreNode != null) {
+            // 删除元素的原来的位置
             SNode<T> target = targetPreNode.getNext();
             targetPreNode.setNext(target.getNext());
-            target.setNext(guard.getNext());
-            guard.setNext(target);
+
+            setTargetToHead(target);
         } else {
-            SNode<T> target = new SNode<>(ele);
-            target.setNext(guard.getNext());
-            guard.setNext(target);
+            setTargetToHead(new SNode<>(ele));
         }
     }
 
+    private void setTargetToHead(SNode<T> target) {
+        target.setNext(guard.getNext());
+        guard.setNext(target);
+    }
+
     private SNode<T> findPreNode(T ele) {
-        SNode<T> res = null;
         SNode<T> cur = guard;
-        while (true) {
-            SNode<T> next = cur.getNext();
-            if (next == null) {
-                break;
+        while (cur.getNext() != null) {
+            if (cur.getNext().getElement().equals(ele)) {
+                return cur;
             }
-            if (next.getElement().equals(ele)) {
-                res = cur;
-                break;
-            }
-            cur = next;
+            cur = cur.getNext();
         }
-        return res;
+        return null;
     }
 
 
