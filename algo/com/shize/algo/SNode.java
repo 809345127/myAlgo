@@ -4,7 +4,7 @@ public class SNode<T> {
 
     private T element;
 
-    private SNode<T> next;
+    public SNode<T> next;
 
     public SNode(T element) {
         this.element = element;
