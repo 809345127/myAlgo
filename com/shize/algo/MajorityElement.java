@@ -1,8 +1,5 @@
 package com.shize.algo;
 
-import java.util.HashMap;
-import java.util.Map;
-
 class MajorityElement {
     public int majorityElement(int[] nums) {
 
